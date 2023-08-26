@@ -2,7 +2,7 @@
 
 ## Crafting Utensiles:
 
-- [ ] Spindle
+- [x] Spindle
 - [ ] Spinnwheel
 - [ ] Spinning Jenny
 - [ ] Weaving Shuttle

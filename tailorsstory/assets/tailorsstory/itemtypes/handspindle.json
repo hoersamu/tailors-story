@@ -168,5 +168,6 @@
 			"rotation": { "x": 90, "y": 1, "z": 0 },
 			"scale": 0.85
 		}
-	}
+	},
+	"class": "ItemHandspindle"
 }
