@@ -28,7 +28,10 @@
 		},
 		{
 			"code": "type",
-			"states": ["raw", "burned"]
+			"states": [
+				"raw",
+				"burned"
+			]
 		}
 	],
 	"skipVariants": [
@@ -52,20 +55,62 @@
 		"spindleweight-steel-raw",
 		"spindleweight-tinbronze-raw"
 	],
-	"shape": { "base": "item/spindleweight" },
-	"textureByType": {
-		"*-raw": { "base": "game:block/clay/blueclay" },
-		"*-blackbronze-burned": { "base": "game:block/metal/sheet/{material}1" },
-		"*-copper-burned": { "base": "game:block/metal/sheet/{material}1" },
-		"*-iron-burned": { "base": "game:block/metal/sheet/{material}1" },
-		"*-meteoriciron-burned": { "base": "game:block/metal/sheet/{material}1" },
-		"*-steel-burned": { "base": "game:block/metal/sheet/{material}1" },
-		"*-tinbronze-burned": { "base": "game:block/metal/sheet/{material}1" },
-		"*-clay-*": { "base": "game:block/clay/ceramic" },
-		"*": { "base": "game:block/wood/debarked/{material}" }
+	"shape": {
+		"base": "item/spindleweight"
+	},
+	"texturesByType": {
+		"*-raw": {
+			"material": {
+				"base": "game:block/clay/blueclay"
+			}
+		},
+		"*-clay-burned": {
+			"material": {
+				"base": "game:block/clay/ceramic"
+			}
+		},
+		"*-blackbronze-burned": {
+			"material": {
+				"base": "game:item/tool/material/{material}"
+			}
+		},
+		"*-copper-burned": {
+			"material": {
+				"base": "game:item/tool/material/{material}"
+			}
+		},
+		"*-iron-burned": {
+			"material": {
+				"base": "game:item/tool/material/{material}"
+			}
+		},
+		"*-meteoriciron-burned": {
+			"material": {
+				"base": "game:item/tool/material/{material}"
+			}
+		},
+		"*-tinbronze-burned": {
+			"material": {
+				"base": "game:item/tool/material/{material}"
+			}
+		},
+		"*-steel-burned": {
+			"material": {
+				"base": "game:item/tool/material/{material}"
+			}
+		},
+		"*": {
+			"material": {
+				"base": "game:block/wood/debarked/{material}"
+			}
+		}
 	},
 	"attributes": {
-		"handbook": { "groupBy": ["spindleweight-*"] },
+		"handbook": {
+			"groupBy": [
+				"spindleweight-*"
+			]
+		},
 		"shelvable": true
 	},
 	"behaviors": [
@@ -85,10 +130,18 @@
 		}
 	],
 	"creativeInventory": {
-		"general": ["*"],
-		"items": ["*"],
-		"tools": ["*"],
-		"tailorsstory": ["*"]
+		"general": [
+			"*"
+		],
+		"items": [
+			"*"
+		],
+		"tools": [
+			"*"
+		],
+		"tailorsstory": [
+			"*"
+		]
 	},
 	"combustiblePropsByType": {
 		"spindleweight-clay-raw": {
