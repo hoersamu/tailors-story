@@ -275,5 +275,6 @@
 			},
 			"scale": 0.85
 		}
-	}
+	},
+	"class": "ItemHandspindle"
 }
