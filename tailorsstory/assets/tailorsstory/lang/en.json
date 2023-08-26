@@ -1,8 +1,22 @@
 {
-	"item-needle-*": "Needle",
-	"item-spindleweight-*-burned": "Spindleweight",
-	"item-spindleweight-*-raw": "Unfired spindleweight",
+	"game:tabname-tailorsstory": "Tailor's Story",
 	"item-handspindle-*": "Spindle",
-
-	"game:tabname-tailorsstory": "Tailor's Story"
+	"item-needle-*": "Needle",
+	"item-spindleweight-*-raw": "Unfired spindleweight",
+	"item-spindleweight-tinbronze-burned": "Spindleweight (Tinbronze)",
+	"item-spindleweight-blackbronze-burned": "Spindleweight (Black Bronze)",
+	"item-spindleweight-copper-burned": "Spindleweight (Copper)",
+	"item-spindleweight-iron-burned": "Spindleweight (Iron)",
+	"item-spindleweight-steel-burned": "Spindleweight (Steel)",
+	"item-spindleweight-meteoriciron-burned": "Spindleweight (Meteoric Iron)",
+	"item-spindleweight-clay-burned": "Spindleweight (Clay)",
+	"item-spindleweight-*-burned": "Spindleweight (Wood)",
+	"item-spindle-tinbronze": "Spindle (Tinbronze)",
+	"item-spindle-blackbronze": "Spindle (Black Bronze)",
+	"item-spindle-copper": "Spindle (Copper)",
+	"item-spindle-iron": "Spindle (Iron)",
+	"item-spindle-steel": "Spindle (Steel)",
+	"item-spindle-meteoriciron": "Spindle (Meteoric Iron)",
+	"item-spindle-clay": "Spindle (Clay)",
+	"item-spindle-*": "Spindle (Wood)"
 }
