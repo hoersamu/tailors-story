@@ -1,0 +1,34 @@
+{
+	"ingredient": {
+		"type": "item",
+		"code": "game:ingot-*",
+		"name": "metal",
+		"allowedVariants": [
+			"copper",
+			"brass",
+			"tinbronze",
+			"blackbronze",
+			"titanium",
+			"steel"
+		]
+	},
+	"pattern": [
+		[
+			"_#_______",
+			"#_#####__",
+			"_#_____#_",
+			"__#####_#",
+			"_#_____#_",
+			"#_#####__",
+			"_#_____#_",
+			"__#####_#",
+			"_______#_"
+		]
+	],
+	"name": "4 Needles",
+	"output": {
+		"type": "item",
+		"code": "needle-{metal}",
+		"stacksize": 4
+	}
+}

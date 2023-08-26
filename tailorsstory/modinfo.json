@@ -1,0 +1,12 @@
+{
+	"type": "code",
+	"modid": "tailorsstory",
+	"name": "Tailors story",
+	"authors": ["hoersamu", "andischa"],
+	"description": "A mod to improve the tailoring experience to be more realistic and challenging",
+	"version": "0.0.1",
+	"dependencies": {
+		"game": ""
+	},
+	"website": ""
+}

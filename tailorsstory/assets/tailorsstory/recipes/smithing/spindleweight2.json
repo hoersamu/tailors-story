@@ -1,0 +1,45 @@
+{
+	"ingredient": {
+		"type": "item",
+		"code": "game:ingot-*",
+		"name": "metal",
+		"allowedVariants": [
+			"copper",
+			"brass",
+			"tinbronze",
+			"blackbronze",
+			"titanium",
+			"steel"
+		]
+	},
+	"pattern": [
+		[
+			"__#______",
+			"_###_____",
+			"##_##____",
+			"_###_____",
+			"__#___#__",
+			"_____###_",
+			"____## ##",
+			"_____###_",
+			"______#__"
+		],
+		[
+			"_________",
+			"_###_____",
+			"_#_#_____",
+			"_###_____",
+			"_________",
+			"_____###_",
+			"_____# #_",
+			"_____###_",
+			"_________"
+		]
+	],
+	"name": "2 Spindleweights",
+	"output": {
+		"type": "item",
+		"code": "spindleweight-{metal}",
+		"stacksize": 2
+	}
+}

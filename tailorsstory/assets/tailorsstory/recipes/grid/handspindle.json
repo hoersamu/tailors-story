@@ -1,0 +1,20 @@
+{
+	"ingredientPattern": "S,T",
+	"width": 1,
+	"height": 2,
+	"ingredients": {
+		"T": {
+			"type": "item",
+			"code": "spindleweight-*-burned",
+			"name": "material"
+		},
+		"S": {
+			"type": "item",
+			"code": "game:stick"
+		}
+	},
+	"output": {
+		"type": "item",
+		"code": "handspindle-{material}"
+	}
+}

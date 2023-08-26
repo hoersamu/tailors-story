@@ -1,0 +1,14 @@
+{
+	"ingredientPattern": "L,A",
+	"ingredients": {
+		"A": { "type": "item", "code": "game:knife-*", "isTool": true },
+		"L": {
+			"type": "block",
+			"code": "game:log-placed-*-ud",
+			"name": "wood"
+		}
+	},
+	"width": 1,
+	"height": 2,
+	"output": { "type": "item", "code": "spindleweight-{wood}" }
+}

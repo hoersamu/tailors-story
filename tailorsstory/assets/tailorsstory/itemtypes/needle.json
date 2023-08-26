@@ -1,0 +1,54 @@
+{
+	"code": "needle",
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [
+				"bone",
+				"copper",
+				"blackbronze",
+				"iron",
+				"meteoriciron",
+				"steel",
+				"tinbronze"
+			]
+		}
+	],
+	"shape": { "base": "item/needle" },
+	"textureByType": {
+		"*-copper": { "base": "game:block/metal/sheet/{type}1" },
+		"*-blackbronze": { "base": "game:block/metal/sheet/{type}1" },
+		"*-iron": { "base": "game:block/metal/sheet/{type}1" },
+		"*-meteoriciron": { "base": "game:block/metal/sheet/{type}1" },
+		"*-steel": { "base": "game:block/metal/sheet/{type}1" },
+		"*-tinbronze": { "base": "game:block/metal/sheet/{type}1" },
+		"*": { "base": "game:block/creature/bone" }
+	},
+	"heldTpHitAnimation": "breaktool",
+	"attributes": {
+		"rackable": "true",
+		"handbook": { "groupBy": ["needle-*"] }
+	},
+	"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "SingleCenter",
+				"collisionBox": {
+					"x1": 0,
+					"y1": 0,
+					"z1": 0,
+					"x2": 1,
+					"y2": 0.125,
+					"z2": 1
+				}
+			}
+		}
+	],
+	"creativeInventory": {
+		"general": ["*"],
+		"items": ["*"],
+		"tools": ["*"],
+		"tailorsstory": ["*"]
+	}
+}

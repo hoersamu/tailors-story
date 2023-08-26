@@ -1,0 +1,21 @@
+{
+	"ingredientPattern": "K,B",
+	"width": 1,
+	"height": 2,
+	"ingredients": {
+		"K": {
+			"type": "item",
+			"code": "game:knife-*",
+			"isTool": true,
+			"toolDurabilityCost": 3
+		},
+		"B": {
+			"type": "item",
+			"code": "game:bone"
+		}
+	},
+	"output": {
+		"type": "item",
+		"code": "needle-bone"
+	}
+}
