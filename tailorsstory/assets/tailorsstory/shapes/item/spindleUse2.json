@@ -9,7 +9,7 @@
 	"textures": {
 		"material": "game:item/tool/material/iron",
 		"stick": "game:item/tool/material/handle",
-		"yarn": "game: item/tool/material/linen"
+		"yarn": "game:item/tool/material/linen"
 	},
 	"elements": [
 		{

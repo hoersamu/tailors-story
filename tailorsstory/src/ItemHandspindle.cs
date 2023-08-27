@@ -1,5 +1,6 @@
 using System;
 using Vintagestory.API.Common;
+using Vintagestory.API.MathTools;
 
 namespace TailorsStory
 {
@@ -30,6 +31,19 @@ namespace TailorsStory
 
     public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
     {
+
+      int renderVariant = GameMath.Clamp((int)Math.Ceiling(secondsUsed / TIME_TO_SPIN * 4), 0, 4);
+      int prevRenderVariant = slot.Itemstack.Attributes.GetInt("renderVariant", 0);
+
+      slot.Itemstack.TempAttributes.SetInt("renderVariant", renderVariant);
+      slot.Itemstack.Attributes.SetInt("renderVariant", renderVariant);
+
+      if (prevRenderVariant != renderVariant)
+      {
+        (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
+      }
+
+
       if (secondsUsed > TIME_TO_SPIN)
       {
         if (getFlaxfibreCount(byEntity) < 4) return false;
