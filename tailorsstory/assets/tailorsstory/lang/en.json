@@ -1,7 +1,10 @@
 {
 	"game:tabname-tailorsstory": "Tailor's Story",
+
 	"item-handspindle-*": "Spindle",
+
 	"item-needle-*": "Needle",
+
 	"item-spindleweight-*-raw": "Unfired spindleweight",
 	"item-spindleweight-tinbronze-burned": "Spindleweight (Tinbronze)",
 	"item-spindleweight-blackbronze-burned": "Spindleweight (Black Bronze)",
@@ -11,6 +14,7 @@
 	"item-spindleweight-meteoriciron-burned": "Spindleweight (Meteoric Iron)",
 	"item-spindleweight-clay-burned": "Spindleweight (Clay)",
 	"item-spindleweight-*-burned": "Spindleweight (Wood)",
+
 	"item-spindle-tinbronze": "Spindle (Tinbronze)",
 	"item-spindle-blackbronze": "Spindle (Black Bronze)",
 	"item-spindle-copper": "Spindle (Copper)",
@@ -18,5 +22,9 @@
 	"item-spindle-steel": "Spindle (Steel)",
 	"item-spindle-meteoriciron": "Spindle (Meteoric Iron)",
 	"item-spindle-clay": "Spindle (Clay)",
-	"item-spindle-*": "Spindle (Wood)"
+	"item-spindle-*": "Spindle (Wood)",
+
+	"block-spinnwheel": "Spinnwheel",
+	"blockhelp-spinnwheel-spin": "Spin",
+	"blockdesc-spinnwheel-*": "A spinwheel is used to spin fibers into yarn"
 }

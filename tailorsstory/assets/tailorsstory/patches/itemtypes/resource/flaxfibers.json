@@ -1,0 +1,13 @@
+[
+	{
+		"op": "add",
+		"path": "/attributes",
+		"value": {
+			"spinnable": {
+				"type": "item",
+				"code": "game:flaxtwine"
+			}
+		},
+		"file": "game:itemtypes/resource/flaxfibers"
+	}
+]

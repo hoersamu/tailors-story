@@ -1,0 +1,53 @@
+{
+	"code": "spinnwheel",
+	"class": "BlockSpinnwheel",
+	"entityClass": "Spinnwheel",
+	"behaviors": [{ "name": "Container" }, { "name": "UnstableFalling" }],
+	"creativeinventory": {
+		"general": ["*"],
+		"terrain": ["*"],
+		"tailorsstory": ["*"]
+	},
+	"shape": { "base": "block/spinnwheel/complete" },
+	"blockmaterial": "Stone",
+	"textures": {
+		"basematerial": {
+			"base": "game:block/stone/rock/granite1"
+		},
+		"baseside": {
+			"base": "game:block/stone/rock/granite1",
+			"overlays": ["block/spinnwheel/baseside"]
+		},
+		"baseup": {
+			"base": "game:block/stone/rock/granite1",
+			"overlays": ["block/spinnwheel/grooves"]
+		},
+		"grindstoneup": {
+			"base": "game:block/stone/rock/granite1",
+			"overlays": ["block/spinnwheel/grindstoneup"]
+		}
+	},
+	"sidesolid": {
+		"all": false,
+		"down": true
+	},
+	"sideopaque": {
+		"all": false,
+		"down": true
+	},
+	"lightAbsorption": 1,
+	"maxStackSize": 1,
+	"replaceable": 600,
+	"resistance": 1.5,
+	"collisionSelectionBoxes": [
+		{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.6875, "z2": 1 },
+		{
+			"x1": 0.125,
+			"y1": 0.6875,
+			"z1": 0.125,
+			"x2": 0.875,
+			"y2": 1,
+			"z2": 0.875
+		}
+	]
+}

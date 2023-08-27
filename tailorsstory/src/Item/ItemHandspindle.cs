@@ -1,7 +1,7 @@
 using System;
 using Vintagestory.API.Common;
 
-namespace TailorsStory
+namespace tailorsstory
 {
   public class ItemHandspindle : Item
   {
