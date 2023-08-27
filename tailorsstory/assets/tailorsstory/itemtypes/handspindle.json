@@ -32,19 +32,19 @@
 		}
 	],
 	"shape": {
-		"base": "item/handspindle"
+		"base": "item/handspindle",
+		"alternates": [
+			{
+				"base": "item/spindleUse1"
+			},
+			{
+				"base": "item/spinldeUse2"
+			},
+			{
+				"base": "item/spinldeUse3"
+			}
+		]
 	},
-	"alternates": [
-		{
-			"base": "item/spindleUse1"
-		},
-		{
-			"base": "item/spinldeUse2"
-		},
-		{
-			"base": "item/spinldeUse3"
-		}
-	],
 	"heldTpHitAnimation": "breaktool",
 	"texturesByType": {
 		"*-clay": {
