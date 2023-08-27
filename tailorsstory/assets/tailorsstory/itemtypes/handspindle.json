@@ -211,8 +211,8 @@
 	"fpHandTransformByType": {
 		"*": {
 			"translation": {
-				"x": 0,
-				"y": 0.65,
+				"x": 0.1,
+				"y": 0.35,
 				"z": 0
 			},
 			"rotation": {
@@ -222,6 +222,19 @@
 			},
 			"scale": 2.5
 		}
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.9,
+			"y": -0.6,
+			"z": -0.54
+		},
+		"rotation": {
+			"x": 90,
+			"y": 0,
+			"z": -83
+		},
+		"scale": 0.85
 	},
 	"guiTransform": {
 		"translation": {
