@@ -1,8 +1,6 @@
 {
 	"game:tabname-tailorsstory": "Tailor's Story",
 
-	"item-handspindle-*": "Spindle",
-
 	"item-needle-*": "Needle",
 
 	"item-spindleweight-*-raw": "Unfired spindleweight",
@@ -15,14 +13,16 @@
 	"item-spindleweight-clay-burned": "Spindleweight (Clay)",
 	"item-spindleweight-*-burned": "Spindleweight (Wood)",
 
-	"item-spindle-tinbronze": "Spindle (Tinbronze)",
-	"item-spindle-blackbronze": "Spindle (Black Bronze)",
-	"item-spindle-copper": "Spindle (Copper)",
-	"item-spindle-iron": "Spindle (Iron)",
-	"item-spindle-steel": "Spindle (Steel)",
-	"item-spindle-meteoriciron": "Spindle (Meteoric Iron)",
-	"item-spindle-clay": "Spindle (Clay)",
-	"item-spindle-*": "Spindle (Wood)",
+	"item-handspindle-tinbronze": "Spindle (Tinbronze)",
+	"item-handspindle-blackbronze": "Spindle (Black Bronze)",
+	"item-handspindle-copper": "Spindle (Copper)",
+	"item-handspindle-iron": "Spindle (Iron)",
+	"item-handspindle-steel": "Spindle (Steel)",
+	"item-handspindle-meteoriciron": "Spindle (Meteoric Iron)",
+	"item-handspindle-clay": "Spindle (Clay)",
+	"item-handspindle-*": "Spindle (Wood)",
+
+	"item-weavingshuttle-*": "Weavingshuttle",
 
 	"block-spinnwheel": "Spinnwheel",
 	"blockhelp-spinnwheel-spin": "Spin",
