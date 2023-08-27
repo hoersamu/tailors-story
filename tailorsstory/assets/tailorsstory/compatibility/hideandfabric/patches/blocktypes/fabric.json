@@ -1,0 +1,13 @@
+[
+	{
+		"op": "add",
+		"path": "/attributes",
+		"value": {
+			"weavable": {
+				"type": "block",
+				"code": "hideandfabric:fabric-{fabric}-normal-down"
+			}
+		},
+		"file": "hideandfabric:blocktypes/cloth.json"
+	}
+]

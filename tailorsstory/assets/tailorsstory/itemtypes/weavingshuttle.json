@@ -1,0 +1,78 @@
+{
+	"code": "weavingshuttle",
+	"damagedby": ["blockbreaking", "attacking"],
+	"variantgroups": [
+		{
+			"code": "material",
+			"states": [
+				"acacia",
+				"aged",
+				"baldcypress",
+				"birch",
+				"ebony",
+				"kapok",
+				"larch",
+				"maple",
+				"oak",
+				"pine",
+				"purpleheart",
+				"redwood",
+				"walnut"
+			]
+		}
+	],
+	"shape": {
+		"base": "item/weavingshuttle"
+	},
+	"heldTpHitAnimation": "breaktool",
+	"textures": {
+		"material": {
+			"base": "game:block/wood/debarked/{material}"
+		}
+	},
+	"attributes": {
+		"rackable": true,
+		"toolrackTransform": {
+			"translation": { "x": 0, "y": 0.4, "z": 0 },
+			"rotation": { "x": 0, "y": 22, "z": 180 },
+			"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+			"scale": 0.79
+		},
+		"groundStorageTransform": {
+			"rotation": { "x": 1, "y": -45, "z": 0 },
+			"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+			"scale": 0.5
+		}
+	},
+	"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "Quadrants"
+			}
+		}
+	],
+	"durability": 100,
+	"creativeinventory": {
+		"general": ["*"],
+		"items": ["*"],
+		"tools": ["*"],
+		"tailorsstory": ["*"]
+	},
+	"combustibleProps": {
+		"burnTemperature": 600,
+		"burnDuration": 24
+	},
+	"fpHandTransform": {
+		"translation": { "x": -0.2, "y": 0, "z": 0.5 },
+		"rotation": { "x": -55, "y": 36, "z": 112 },
+		"scale": 2.5
+	},
+	"guiTransform": {
+		"translation": { "x": 0, "y": 0, "z": 0 },
+		"rotation": { "x": -76, "y": -31, "z": -160 },
+		"origin": { "x": 0.55, "y": 0.25, "z": 0.6 },
+		"scale": 1.91
+	},
+	"class": "ItemWeavingshuttle"
+}
