@@ -1,0 +1,8 @@
+[
+	{
+		"op": "add",
+		"path": "/enabled",
+		"value": "false",
+		"file": "hideandfabric:recipes/grid/fabric"
+	}
+]

@@ -2,17 +2,17 @@ using Vintagestory.API.Common;
 
 namespace tailorsstory
 {
-  public class SpinnableAttributes
+  public class WeavableAttributes
   {
-    public readonly string ATTRIBUTE_CODE = "spinnable";
+    public readonly string ATTRIBUTE_CODE = "weavable";
 
-    public bool isSpinnable = false;
+    public bool isWeavable = false;
     public int inputStackSize;
     public int outputStackSize;
     public string outputCode;
     public string type;
 
-    public SpinnableAttributes(CollectibleObject collectible)
+    public WeavableAttributes(CollectibleObject collectible)
     {
       if (collectible.Attributes?[ATTRIBUTE_CODE] != null)
       {
@@ -23,14 +23,14 @@ namespace tailorsstory
 
         if (outputCode != "" && type != "")
         {
-          isSpinnable = true;
+          isWeavable = true;
         }
       }
     }
 
     public JsonItemStack getJsonItemStack()
     {
-      if (!isSpinnable) return null;
+      if (!isWeavable) return null;
 
       return new JsonItemStack()
       {
