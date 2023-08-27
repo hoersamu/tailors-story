@@ -3,7 +3,7 @@
 ## Crafting Utensiles:
 
 - [x] Spindle
-- [ ] Spinnwheel
+- [x] Spinnwheel
 - [ ] Spinning Jenny
 - [ ] Weaving Shuttle
 - [ ] Gravity Loom
@@ -15,12 +15,11 @@
 ## Spinning:
 
 - [ ] Spindle Usage:
-  - [ ] rightclick Spindle with Flax fibers in inventory
+  - [x] rightclick Spindle with Flax fibers in inventory
   - [ ] spindle spins and you recieve twine after a while
 - [ ] Spinnwheel Usage:
-  - [ ] Put Flax fibers (large ammount) into wheel
-  - [ ] Spin wheel to generate twine
-  - [ ] collect from top of spinnwheel with empty hand
+  - [x] Put Flax fibers into wheel
+  - [x] Spin wheel to generate twine
 - [ ] Spinning Jenny:
   - [ ] Add material via a chute
   - [ ] supply power
@@ -62,11 +61,3 @@
 
 - [ ] Oh god no, why
 - [ ] Place snarky remarks on all
-
-## Samu
-
-- [ ] flax fiber + handspindle -> flax twine
-- [ ] spindleweight + stick -> handspindle (different materials for different durability)
-- [ ] flax twine + needle (with twine) -> linen normal stitches
-- [ ] Spindle (like quern can be used by hand or with power)
-- [ ] Sewing machine

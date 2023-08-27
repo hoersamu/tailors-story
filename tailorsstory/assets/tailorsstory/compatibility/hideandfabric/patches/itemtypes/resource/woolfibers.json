@@ -1,0 +1,13 @@
+[
+	{
+		"op": "add",
+		"path": "/attributes",
+		"value": {
+			"spinnable": {
+				"type": "item",
+				"code": "hideandfabric:twine-{material}"
+			}
+		},
+		"file": "hideandfabric:itemtypes/resource/woolfibers.json"
+	}
+]

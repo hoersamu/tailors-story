@@ -1,0 +1,6 @@
+languageIds:
+  - javascript
+  - typescript
+
+usageMatchRegex:
+  - "[^\\w\\d]t\\(['\"`]({key})['\"`]"
