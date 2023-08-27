@@ -1,7 +1,7 @@
 {
 	"code": "spinnwheel",
 	"class": "BlockSpinnwheel",
-	"entityClass": "Spinnwheel",
+	"entityClass": "BlockEntitySpinnwheel",
 	"behaviors": [{ "name": "Container" }, { "name": "UnstableFalling" }],
 	"creativeinventory": {
 		"general": ["*"],
