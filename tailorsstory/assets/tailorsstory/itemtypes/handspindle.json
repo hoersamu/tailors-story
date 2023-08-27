@@ -234,19 +234,6 @@
 			"scale": 2.5
 		}
 	},
-	"tpHandTransform": {
-		"translation": {
-			"x": -0.9,
-			"y": -0.6,
-			"z": -0.54
-		},
-		"rotation": {
-			"x": 90,
-			"y": 0,
-			"z": -83
-		},
-		"scale": 0.85
-	},
 	"guiTransform": {
 		"translation": {
 			"x": 0,
@@ -288,14 +275,14 @@
 	"tpHandTransformByType": {
 		"*": {
 			"translation": {
-				"x": -0.99,
+				"x": -1.09,
 				"y": -0.6,
-				"z": -0.2
+				"z": -0.54
 			},
 			"rotation": {
 				"x": 90,
 				"y": 1,
-				"z": 0
+				"z": -83
 			},
 			"scale": 0.85
 		}
