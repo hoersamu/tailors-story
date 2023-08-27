@@ -34,6 +34,17 @@
 	"shape": {
 		"base": "item/handspindle"
 	},
+	"alternates": [
+		{
+			"base": "item/spindleUse1"
+		},
+		{
+			"base": "item/spinldeUse2"
+		},
+		{
+			"base": "item/spinldeUse3"
+		}
+	],
 	"heldTpHitAnimation": "breaktool",
 	"texturesByType": {
 		"*-clay": {
