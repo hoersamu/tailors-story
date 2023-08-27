@@ -86,7 +86,7 @@
 		},
 		"*-meteoriciron-burned": {
 			"material": {
-				"base": "game:item/tool/material/{material}"
+				"base": "game:block/metal/plate/{material}"
 			}
 		},
 		"*-tinbronze-burned": {
@@ -96,7 +96,7 @@
 		},
 		"*-steel-burned": {
 			"material": {
-				"base": "game:item/tool/material/{material}"
+				"base": "game:block/metal/plate/{material}"
 			}
 		},
 		"*": {

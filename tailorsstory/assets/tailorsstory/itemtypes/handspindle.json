@@ -69,7 +69,7 @@
 		},
 		"*-meteoriciron": {
 			"material": {
-				"base": "game:item/tool/material/{material}"
+				"base": "game:block/metal/plate/{material}"
 			}
 		},
 		"*-tinbronze": {
@@ -79,7 +79,7 @@
 		},
 		"*-steel": {
 			"material": {
-				"base": "game:item/tool/material/{material}"
+				"base": "game:block/metal/plate/{material}"
 			}
 		},
 		"*": {
