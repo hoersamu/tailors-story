@@ -133,9 +133,10 @@ namespace tailorsstory
 
     private void Every100ms(float dt)
     {
-      float spinningSpeed = SpinningSpeed;
-
       // Only tick on the server and merely sync to client
+      if (Api.Side == EnumAppSide.Client) return;
+
+      float spinningSpeed = SpinningSpeed;
 
       // Use up fuel
       if (CanSpin() && spinningSpeed > 0)

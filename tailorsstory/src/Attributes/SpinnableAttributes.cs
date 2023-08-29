@@ -1,3 +1,4 @@
+using System;
 using Vintagestory.API.Common;
 
 namespace tailorsstory
@@ -10,18 +11,18 @@ namespace tailorsstory
     public int inputStackSize;
     public int outputStackSize;
     public string outputCode;
-    public string type;
+    public EnumItemClass type;
 
     public SpinnableAttributes(CollectibleObject collectible)
     {
-      if (collectible.Attributes?[ATTRIBUTE_CODE] != null)
+      if (collectible?.Attributes?[ATTRIBUTE_CODE] != null)
       {
         inputStackSize = collectible.Attributes[ATTRIBUTE_CODE]["requiredAmount"].AsInt(4);
         outputStackSize = collectible.Attributes[ATTRIBUTE_CODE]["amount"].AsInt(1);
         outputCode = collectible.Attributes[ATTRIBUTE_CODE]["code"].AsString("");
-        type = collectible.Attributes[ATTRIBUTE_CODE]["type"].AsString("");
+        type = collectible.Attributes[ATTRIBUTE_CODE]["type"].AsString("") == "block" ? EnumItemClass.Block : EnumItemClass.Item;
 
-        if (outputCode != "" && type != "")
+        if (outputCode != "")
         {
           isSpinnable = true;
         }
@@ -34,7 +35,7 @@ namespace tailorsstory
 
       return new JsonItemStack()
       {
-        Type = EnumItemClass.Item,
+        Type = type,
         Code = new AssetLocation(outputCode),
         StackSize = outputStackSize
       };

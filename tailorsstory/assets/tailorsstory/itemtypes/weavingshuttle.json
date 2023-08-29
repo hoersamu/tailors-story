@@ -73,6 +73,5 @@
 		"rotation": { "x": -76, "y": -31, "z": -160 },
 		"origin": { "x": 0.55, "y": 0.25, "z": 0.6 },
 		"scale": 1.91
-	},
-	"class": "ItemWeavingshuttle"
+	}
 }

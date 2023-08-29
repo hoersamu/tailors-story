@@ -1,0 +1,19 @@
+{
+	"code": "gravityloom",
+	"class": "BlockGravityLoom",
+	"entityClass": "BlockEntityGravityLoom",
+	"behaviors": [{ "name": "BreakIfFloating" }, { "name": "Container" }],
+	"creativeinventory": {
+		"general": ["*"],
+		"terrain": ["*"],
+		"tailorsstory": ["*"]
+	},
+	"shape": { "base": "block/loom/gravityloom" },
+	"lightAbsorption": 1,
+	"maxStackSize": 1,
+	"replaceable": 600,
+	"resistance": 1.5,
+	"collisionSelectionBoxes": [
+		{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 2, "z2": 1 }
+	]
+}

@@ -25,7 +25,7 @@ namespace tailorsstory
 
       if (beSpinnwheel != null && beSpinnwheel.CanSpin() && (blockSel.SelectionBoxIndex == 1 || beSpinnwheel.Inventory.openedByPlayerGUIds.Contains(byPlayer.PlayerUID)))
       {
-        beSpinnwheel.SetPlayerSpinning(byPlayer, true);
+
         return true;
       }
 

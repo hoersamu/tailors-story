@@ -65,6 +65,7 @@ namespace tailorsstory
 
     public override float GetSuitability(ItemSlot sourceSlot, ItemSlot targetSlot, bool isMerge)
     {
+      // TODO: check
       if (targetSlot == slots[0] && sourceSlot.Itemstack.Collectible.GrindingProps != null) return 4f;
 
       return base.GetSuitability(sourceSlot, targetSlot, isMerge);
