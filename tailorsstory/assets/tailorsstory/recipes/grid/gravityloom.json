@@ -1,0 +1,51 @@
+[
+	{
+		"ingredientPattern": "TST,S S,SWS",
+		"width": 3,
+		"height": 3,
+		"ingredients": {
+			"T": {
+				"type": "item",
+				"code": "game:flaxtwine"
+			},
+			"S": {
+				"type": "item",
+				"code": "game:stick"
+			},
+			"W": {
+				"type": "item",
+				"code": "spindleweight-*",
+				"quantity": 8
+			}
+		},
+		"output": {
+			"type": "block",
+			"code": "gravityloom"
+		}
+	},
+	{
+		"enabled": false,
+		"ingredientPattern": "TST,S S,SWS",
+		"width": 3,
+		"height": 3,
+		"ingredients": {
+			"T": {
+				"type": "item",
+				"code": "hideandfabric:twine-*"
+			},
+			"S": {
+				"type": "item",
+				"code": "game:stick"
+			},
+			"W": {
+				"type": "item",
+				"code": "spindleweight-*",
+				"quantity": 8
+			}
+		},
+		"output": {
+			"type": "block",
+			"code": "gravityloom"
+		}
+	}
+]

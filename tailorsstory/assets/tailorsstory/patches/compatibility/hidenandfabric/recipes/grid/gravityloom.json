@@ -1,0 +1,9 @@
+[
+	{
+		"op": "replace",
+		"path": "/1/enabled",
+		"value": true,
+		"file": "recipes/grid/gravityloom",
+		"dependsOn": [{ "modid": "hideandfabric" }]
+	}
+]

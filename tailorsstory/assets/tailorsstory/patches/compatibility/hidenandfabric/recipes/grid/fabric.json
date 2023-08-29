@@ -1,0 +1,9 @@
+[
+	{
+		"op": "add",
+		"path": "/",
+		"value": "false",
+		"file": "hideandfabric:recipes/grid/fabric",
+		"dependsOn": [{ "modid": "hideandfabric" }]
+	}
+]

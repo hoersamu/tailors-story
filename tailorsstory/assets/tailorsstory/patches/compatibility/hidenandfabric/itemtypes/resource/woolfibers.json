@@ -8,6 +8,7 @@
 				"code": "hideandfabric:twine-{material}"
 			}
 		},
-		"file": "hideandfabric:itemtypes/resource/woolfibers.json"
+		"file": "hideandfabric:itemtypes/resource/woolfibers.json",
+		"dependsOn": [{ "modid": "hideandfabric" }]
 	}
 ]
