@@ -64,11 +64,11 @@ namespace tailorsstory
       return new WorldInteraction[] {
           new WorldInteraction()
           {
-            ActionLangCode = "tailorsstory:blockhelp-spinnwheel-spin",
+            ActionLangCode = "tailorsstory:blockhelp-gravityloom-spin",
             MouseButton = EnumMouseButton.Right,
             ShouldApply = (wi, bs, es) => {
-                BlockEntitySpinnwheel beSpinnwheel = world.BlockAccessor.GetBlockEntity(bs.Position) as BlockEntitySpinnwheel;
-                return beSpinnwheel != null && beSpinnwheel.CanSpin();
+                BlockEntityGravityLoom beGravityLoom = world.BlockAccessor.GetBlockEntity(bs.Position) as BlockEntityGravityLoom;
+                return beGravityLoom != null && beGravityLoom.CanWeave();
             }
           }
       }.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));

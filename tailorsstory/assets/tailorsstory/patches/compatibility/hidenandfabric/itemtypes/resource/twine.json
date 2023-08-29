@@ -1,0 +1,14 @@
+[
+	{
+		"op": "add",
+		"path": "/attributes",
+		"value": {
+			"weavable": {
+				"type": "block",
+				"code": "hideandfabric:fabric-{material}-normal-down"
+			}
+		},
+		"file": "hideandfabric:itemtypes/resource/twine.json",
+		"dependsOn": [{ "modid": "hideandfabric" }]
+	}
+]

@@ -3,16 +3,42 @@
 	"class": "BlockGravityLoom",
 	"entityClass": "BlockEntityGravityLoom",
 	"behaviors": [{ "name": "BreakIfFloating" }, { "name": "Container" }],
+	"entityBehaviors": [{ "name": "Animatable" }],
 	"creativeinventory": {
 		"general": ["*"],
 		"terrain": ["*"],
 		"tailorsstory": ["*"]
 	},
-	"shape": { "base": "block/loom/gravityloom" },
-	"lightAbsorption": 1,
+	"shape": { "base": "block/loom/gravityloom-4" },
+	"blockmaterial": "Wood",
+	"heldTpIdleAnimation": "holdbothhandslarge",
+	"heldTpUseAnimation": "twohandplaceblock",
+	"sidesolid": {
+		"all": false
+	},
+	"sideopaque": {
+		"all": false
+	},
+	"rainPermeable": true,
+	"resistance": 3.5,
+	"lightAbsorption": 0,
 	"maxStackSize": 1,
-	"replaceable": 600,
-	"resistance": 1.5,
+	"guiTransform": {
+		"translation": { "x": 0, "y": 7, "z": 0 },
+		"rotation": { "x": -22, "y": -145, "z": 0 },
+		"scale": 0.7
+	},
+	"tpHandTransform": {
+		"translation": { "x": -1.1, "y": -1.8, "z": -0.9 },
+		"rotation": { "x": -91, "y": 31, "z": -111 },
+		"scale": 0.39
+	},
+	"sounds": {
+		"hit": "game:block/planks",
+		"break": "game:block/planks",
+		"place": "game:block/planks",
+		"walk": "game:walk/wood"
+	},
 	"collisionSelectionBoxes": [
 		{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 2, "z2": 1 }
 	]

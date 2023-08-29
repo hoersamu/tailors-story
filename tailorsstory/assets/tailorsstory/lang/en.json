@@ -26,5 +26,9 @@
 
 	"block-spinnwheel": "Spinnwheel",
 	"blockhelp-spinnwheel-spin": "Spin",
-	"blockdesc-spinnwheel-*": "A spinwheel is used to spin fibers into yarn"
+	"blockdesc-spinnwheel-*": "Their gloom-enveloped eyes are tearless, They sit at the spinning wheel, snarling cheerless",
+
+	"block-gravityloom": "Gravityloom",
+	"blockhelp-gravityloom-weave": "Weave",
+	"blockdesc-gravityloom-*": "O shuttle fly! Loom crank away! We weave unfailing, night and day-"
 }

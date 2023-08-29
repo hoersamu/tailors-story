@@ -10,35 +10,96 @@ namespace tailorsstory
 {
   public class BlockEntityGravityLoom : BlockEntityContainer
   {
-    private readonly int WEAVING_TIME = 4;
+    private const int WEAVING_TIME = 4;
 
     // For how long the current fiber has been spinning
-    public float inputWeaveTime;
-    public float prevInputWeaveTime;
+    private float inputWeaveTime;
+    private float prevInputWeaveTime;
 
     // Server side only
-    Dictionary<string, long> playersWeaving = new Dictionary<string, long>();
+    private readonly Dictionary<string, long> playersWeaving = new();
     // Client and serverside
-    int quantityPlayersWeaving;
+    private int quantityPlayersWeaving;
 
-    InventoryGeneric inv;
-    public override InventoryBase Inventory => inv;
+    readonly InventoryGeneric Inv;
+    public override InventoryBase Inventory => Inv;
     public override string InventoryClassName => "gravityloom";
-    ItemSlot contentSlot { get { return inv[0]; } }
-    WeavableAttributes weavableAttributes => new WeavableAttributes(contentSlot.Itemstack?.Collectible);
+    private ItemSlot ContentSlot { get { return Inv[0]; } }
+
+    private WeavableAttributes WeavableAttributes => new(ContentSlot.Itemstack?.Collectible);
 
     public BlockEntityGravityLoom()
     {
-      inv = new InventoryGeneric(1, null, null);
+      Inv = new InventoryGeneric(1, null, null);
     }
+
+    BlockEntityAnimationUtil AnimUtil
+    {
+      get { return GetBehavior<BEBehaviorAnimatable>().animUtil; }
+    }
+    readonly AnimationMetaData CompressAnimMeta = new()
+    {
+      Animation = "weave",
+      Code = "weave",
+      AnimationSpeed = 1,
+      EaseOutSpeed = 1,
+      EaseInSpeed = 1
+    };
 
     public override void Initialize(ICoreAPI api)
     {
       base.Initialize(api);
-      inv.LateInitialize(InventoryClassName + "-" + Pos, api);
+      Inv.LateInitialize(InventoryClassName + "-" + Pos, api);
 
       RegisterGameTickListener(Every100ms, 100);
       RegisterGameTickListener(Every500ms, 500);
+
+      if (Block != null)
+      {
+        Shape shape = Shape.TryGet(api, GetShapeForFillLevel(4));
+
+
+        if (api.Side == EnumAppSide.Client)
+        {
+          for (int i = 0; i <= 4; i++)
+          {
+            if (GetMeshDataForFillLevel(i) == null)
+            {
+              SetMeshDataForFillLevel(GenMeshData(i), i);
+            }
+          }
+          AnimUtil.InitializeAnimator("gravityloom", shape, null, new Vec3f(0, Block.Shape.rotateY, 0));
+        }
+      }
+    }
+
+    private void SetMeshDataForFillLevel(MeshData mesh, int fillLevel)
+    {
+      Api.ObjectCache["gravityloom-" + fillLevel] = mesh;
+    }
+
+    private MeshData GetMeshDataForFillLevel(int fillLevel)
+    {
+      Api.ObjectCache.TryGetValue("gravityloom-" + fillLevel, out object value);
+      return (MeshData)value;
+    }
+
+    private MeshData GenMeshData(int fillLevel)
+    {
+      Block block = Api.World.BlockAccessor.GetBlock(Pos);
+      if (block.BlockId == 0) return null;
+
+      ITesselatorAPI mesher = ((ICoreClientAPI)Api).Tesselator;
+
+      Shape shape = Shape.TryGet(Api, GetShapeForFillLevel(fillLevel));
+      mesher.TesselateShape(block, shape, out MeshData mesh);
+
+      return mesh;
+    }
+
+    private static string GetShapeForFillLevel(int fillLevel)
+    {
+      return "tailorsstory:shapes/block/loom/gravityloom-" + fillLevel + ".json";
     }
 
     public void IsWeaving(IPlayer byPlayer)
@@ -58,7 +119,7 @@ namespace tailorsstory
 
         if (inputWeaveTime >= WEAVING_TIME)
         {
-          weaveInput();
+          WeaveInput();
           inputWeaveTime = 0;
         }
 
@@ -66,9 +127,9 @@ namespace tailorsstory
       }
     }
 
-    private void weaveInput()
+    private void WeaveInput()
     {
-      JsonItemStack jsonItemStack = weavableAttributes.getJsonItemStack();
+      JsonItemStack jsonItemStack = WeavableAttributes.getJsonItemStack();
       bool resolve = jsonItemStack.Resolve(Api.World, "weaving");
       if (!resolve) return;
 
@@ -76,20 +137,19 @@ namespace tailorsstory
 
       Api.World.SpawnItemEntity(weavedStack, Pos.ToVec3d().Add(0.5, 0.5, 0.5));
 
-      inv[0].TakeOutWhole();
-      MarkDirty();
+      Inv[0].TakeOutWhole();
+      Api.World.BlockAccessor.MarkBlockDirty(Pos);
     }
 
     // Sync to client every 500ms
     private void Every500ms(float dt)
     {
-      if (Api.Side == EnumAppSide.Server && (quantityPlayersWeaving > 0 || prevInputWeaveTime != inputWeaveTime) && weavableAttributes != null)  //don't spam update packets when empty, as inputSpinTime is irrelevant when empty
+      if (Api.Side == EnumAppSide.Server && (quantityPlayersWeaving > 0 || prevInputWeaveTime != inputWeaveTime) && WeavableAttributes != null)  //don't spam update packets when empty, as inputSpinTime is irrelevant when empty
       {
         MarkDirty();
       }
 
       prevInputWeaveTime = inputWeaveTime;
-
 
       foreach (var val in playersWeaving)
       {
@@ -114,11 +174,11 @@ namespace tailorsstory
       }
 
       quantityPlayersWeaving = playersWeaving.Count;
-      updateWeavingState();
+      UpdateWeavingState();
     }
 
     bool beforeWeaving;
-    void updateWeavingState()
+    private void UpdateWeavingState()
     {
       if (Api?.World == null) return;
 
@@ -138,7 +198,7 @@ namespace tailorsstory
 
     public bool CanWeave()
     {
-      return weavableAttributes != null && contentSlot.Itemstack?.StackSize >= weavableAttributes.inputStackSize;
+      return WeavableAttributes != null && ContentSlot.Itemstack?.StackSize >= WeavableAttributes.inputStackSize;
     }
 
     public bool OnPlayerInteract(IPlayer byPlayer)
@@ -146,51 +206,62 @@ namespace tailorsstory
       if (!CanWeave())
       {
         ItemSlot slot = byPlayer.InventoryManager.ActiveHotbarSlot;
-        if (isValidWeavingMaterial(slot.Itemstack))
+        if (IsValidWeavingMaterial(slot.Itemstack))
         {
-          int moved = slot.TryPutInto(Api.World, contentSlot);
+          int moved = slot.TryPutInto(Api.World, ContentSlot);
           if (moved > 0)
           {
-            MarkDirty();
             AssetLocation sound = slot.Itemstack?.Block?.Sounds?.Place;
             Api.World.PlaySoundAt(sound != null ? sound : new AssetLocation("sounds/player/build"), byPlayer.Entity, byPlayer, true, 16);
             byPlayer.InventoryManager.BroadcastHotbarSlot();
             (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
 
+            MarkDirty();
+            Api.World.BlockAccessor.MarkBlockDirty(Pos);
             return true;
           }
         }
       }
-      else if (hasWeavingShuttleInHand(byPlayer))
+      else if (HasWeavingShuttleInHand(byPlayer))
       {
         SetPlayerWeaving(byPlayer, true);
+        AnimUtil.StartAnimation(CompressAnimMeta);
         return true;
       }
 
       return false;
     }
 
-    private bool isValidWeavingMaterial(ItemStack stack)
+    private static bool IsValidWeavingMaterial(ItemStack stack)
     {
       return new WeavableAttributes(stack?.Collectible).isWeavable;
     }
 
-    private bool hasWeavingShuttleInHand(IPlayer byPlayer)
+    private static bool HasWeavingShuttleInHand(IPlayer byPlayer)
     {
       return byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack.Collectible.Code.Path.StartsWith("weavingshuttle");
+    }
+
+    public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)
+    {
+      if (Block == null) return false;
+
+      mesher.AddMeshData(GetMeshDataForFillLevel(ContentSlot.Itemstack?.StackSize ?? 0));
+
+      return true;
     }
 
     public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
     {
       base.FromTreeAttributes(tree, worldForResolving);
       base.FromTreeAttributes(tree, worldForResolving);
-      inv.FromTreeAttributes(tree.GetTreeAttribute("inventory"));
+      Inv.FromTreeAttributes(tree.GetTreeAttribute("inventory"));
 
       inputWeaveTime = tree.GetFloat("inputSpinTime");
 
       if (worldForResolving.Side == EnumAppSide.Client)
       {
-        List<int> clientIds = new List<int>((tree["clientIdsSpinning"] as IntArrayAttribute).value);
+        List<int> clientIds = new((tree["clientIdsSpinning"] as IntArrayAttribute).value);
 
         quantityPlayersWeaving = clientIds.Count;
 
@@ -216,7 +287,7 @@ namespace tailorsstory
           if (plr != null) playersWeaving.Add(plr.PlayerUID, worldForResolving.ElapsedMilliseconds);
         }
 
-        updateWeavingState();
+        UpdateWeavingState();
       }
     }
 
@@ -225,11 +296,11 @@ namespace tailorsstory
       base.ToTreeAttributes(tree);
 
       ITreeAttribute invtree = new TreeAttribute();
-      inv.ToTreeAttributes(invtree);
+      Inv.ToTreeAttributes(invtree);
       tree["inventory"] = invtree;
 
       tree.SetFloat("inputSpinTime", inputWeaveTime);
-      List<int> vals = new List<int>();
+      List<int> vals = new();
       foreach (var val in playersWeaving)
       {
         IPlayer plr = Api.World.PlayerByUid(val.Key);

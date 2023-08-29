@@ -3613,8 +3613,8 @@
 	],
 	"animations": [
 		{
-			"name": "Weave",
-			"code": "Weave",
+			"name": "weave",
+			"code": "weave",
 			"quantityframes": 120,
 			"onActivityStopped": "PlayTillEnd",
 			"onAnimationEnd": "EaseOut",
