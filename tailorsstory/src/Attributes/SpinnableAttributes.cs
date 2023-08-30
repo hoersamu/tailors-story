@@ -29,7 +29,7 @@ namespace tailorsstory
       }
     }
 
-    public JsonItemStack getJsonItemStack()
+    public JsonItemStack GetJsonItemStack()
     {
       if (!isSpinnable) return null;
 
@@ -39,6 +39,16 @@ namespace tailorsstory
         Code = new AssetLocation(outputCode),
         StackSize = outputStackSize
       };
+    }
+
+    public ItemStack GetItemStack(IWorldAccessor resolver)
+    {
+      if (!isSpinnable) return null;
+
+      JsonItemStack jsonItemStack = GetJsonItemStack();
+      bool resolved = jsonItemStack.Resolve(resolver, "spinning");
+
+      return resolved ? jsonItemStack.ResolvedItemstack : null;
     }
   }
 }

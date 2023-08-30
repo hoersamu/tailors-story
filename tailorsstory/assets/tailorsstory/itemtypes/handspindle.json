@@ -29,16 +29,16 @@
 		}
 	],
 	"shape": {
-		"base": "item/handspindle",
+		"base": "item/handspindle/handspindle",
 		"alternates": [
 			{
-				"base": "item/spindleUse1"
+				"base": "item/handspindle/handspindle-use1"
 			},
 			{
-				"base": "item/spindleUse2"
+				"base": "item/handspindle/handspindle-use2"
 			},
 			{
-				"base": "item/spindleUse3"
+				"base": "item/handspindle/handspindle-use3"
 			}
 		]
 	},

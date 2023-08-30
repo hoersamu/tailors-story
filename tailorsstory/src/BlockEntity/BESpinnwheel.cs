@@ -157,11 +157,9 @@ namespace tailorsstory
     {
       int requiredMaterial = InputSpinnableAttributes.inputStackSize;
       if (InputSlot.Itemstack.StackSize < requiredMaterial) return;
-      JsonItemStack jsonItemStack = InputSpinnableAttributes.getJsonItemStack();
-      bool resolve = jsonItemStack.Resolve(Api.World, "spinning");
-      if (!resolve) return;
 
-      ItemStack spinnedStack = jsonItemStack.ResolvedItemstack;
+      ItemStack spinnedStack = InputSpinnableAttributes.GetItemStack(Api.World);
+      if (spinnedStack == null) return;
 
       if (OutputSlot.Itemstack == null)
       {

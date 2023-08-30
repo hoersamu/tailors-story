@@ -5,11 +5,11 @@
 		"name": "metal",
 		"allowedVariants": [
 			"copper",
-			"brass",
-			"tinbronze",
 			"blackbronze",
-			"titanium",
-			"steel"
+			"iron",
+			"meteoriciron",
+			"steel",
+			"tinbronze"
 		]
 	},
 	"pattern": [
