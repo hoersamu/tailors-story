@@ -1,9 +1,6 @@
 {
 	"code": "handspindle",
-	"damagedby": [
-		"blockbreaking",
-		"attacking"
-	],
+	"damagedby": ["blockbreaking", "attacking"],
 	"variantgroups": [
 		{
 			"code": "material",
@@ -38,10 +35,10 @@
 				"base": "item/spindleUse1"
 			},
 			{
-				"base": "item/spinldeUse2"
+				"base": "item/spindleUse2"
 			},
 			{
-				"base": "item/spinldeUse3"
+				"base": "item/spindleUse3"
 			}
 		]
 	},
@@ -91,9 +88,7 @@
 	"attributes": {
 		"rackable": true,
 		"handbook": {
-			"groupBy": [
-				"handspindle-*"
-			]
+			"groupBy": ["handspindle-*"]
 		},
 		"toolrackTransformByType": {
 			"*": {
@@ -156,18 +151,10 @@
 		"handspindle-*": 100
 	},
 	"creativeinventory": {
-		"general": [
-			"*"
-		],
-		"items": [
-			"*"
-		],
-		"tools": [
-			"*"
-		],
-		"tailorsstory": [
-			"*"
-		]
+		"general": ["*"],
+		"items": ["*"],
+		"tools": ["*"],
+		"tailorsstory": ["*"]
 	},
 	"combustiblePropsByType": {
 		"*-acacia": {

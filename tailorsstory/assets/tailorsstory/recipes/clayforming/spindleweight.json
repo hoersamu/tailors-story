@@ -3,10 +3,7 @@
 		"type": "item",
 		"code": "game:clay-*",
 		"name": "type",
-		"allowedVariants": [
-			"blue",
-			"fire"
-		]
+		"allowedVariants": ["blue", "fire"]
 	},
 	"pattern": [
 		[
@@ -30,7 +27,7 @@
 			"________"
 		]
 	],
-	"name": "Spindleweight",
+	"name": "spindleweight",
 	"output": {
 		"type": "item",
 		"code": "spindleweight-clay-raw",

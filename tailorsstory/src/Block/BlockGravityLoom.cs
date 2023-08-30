@@ -64,7 +64,7 @@ namespace tailorsstory
       return new WorldInteraction[] {
           new WorldInteraction()
           {
-            ActionLangCode = "tailorsstory:blockhelp-gravityloom-spin",
+            ActionLangCode = "tailorsstory:blockhelp-gravityloom-weave",
             MouseButton = EnumMouseButton.Right,
             ShouldApply = (wi, bs, es) => {
                 BlockEntityGravityLoom beGravityLoom = world.BlockAccessor.GetBlockEntity(bs.Position) as BlockEntityGravityLoom;

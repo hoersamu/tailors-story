@@ -8,11 +8,12 @@ namespace tailorsstory
   {
     private readonly float TIME_TO_SPIN = 3f;
 
-    protected int getFlaxfibreCount(EntityAgent byEntity)
+    protected int getFlaxfibreCount(EntityAgent byPlayer)
     {
       int count = 0;
-      byEntity.WalkInventory((invslot) =>
+      byPlayer.WalkInventory((invslot) =>
       {
+        // TODO: make generic
         if (invslot.Itemstack != null && invslot.Itemstack.Collectible.Code.Path.StartsWith("flaxfibers"))
         {
           count += invslot.Itemstack.StackSize;

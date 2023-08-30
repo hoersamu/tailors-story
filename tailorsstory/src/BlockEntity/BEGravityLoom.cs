@@ -239,7 +239,7 @@ namespace tailorsstory
 
     private static bool HasWeavingShuttleInHand(IPlayer byPlayer)
     {
-      return byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack.Collectible.Code.Path.StartsWith("weavingshuttle");
+      return byPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible.Code.Path.StartsWith("weavingshuttle") ?? false;
     }
 
     public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)

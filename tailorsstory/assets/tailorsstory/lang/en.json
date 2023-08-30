@@ -30,5 +30,8 @@
 
 	"block-gravityloom": "Gravityloom",
 	"blockhelp-gravityloom-weave": "Weave",
-	"blockdesc-gravityloom-*": "O shuttle fly! Loom crank away! We weave unfailing, night and day-"
+	"blockdesc-gravityloom-*": "O shuttle fly! Loom crank away! We weave unfailing, night and day-",
+
+	"tailorsstory:block-tailors-toolmold-raw-spindleweight": "Spindleweight mold (unfired)",
+	"tailorsstory:block-tailors-toolmold-burned-spindleweight": "Spindleweight mold"
 }
