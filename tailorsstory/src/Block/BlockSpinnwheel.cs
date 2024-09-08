@@ -11,7 +11,7 @@ namespace tailorsstory
   {
     public override bool DoParticalSelection(IWorldAccessor world, BlockPos pos)
     {
-      return true;
+      return false;
     }
 
     public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)

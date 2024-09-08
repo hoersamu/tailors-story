@@ -20,7 +20,7 @@ namespace tailorsstory
     public float prevInputSpinTime;
 
     GuiDialogBlockEntitySpinnwheel clientDialog;
-    SpinnwheelTopRenderer renderer;
+
 
     // Server side only
     Dictionary<string, long> playersSpinning = new Dictionary<string, long>();
@@ -109,21 +109,7 @@ namespace tailorsstory
       RegisterGameTickListener(Every100ms, 100);
       RegisterGameTickListener(Every500ms, 500);
 
-      if (api.Side == EnumAppSide.Client)
-      {
-        renderer = new SpinnwheelTopRenderer(api as ICoreClientAPI, Pos, GenMesh("top"));
 
-        (api as ICoreClientAPI).Event.RegisterRenderer(renderer, EnumRenderStage.Opaque, "spinnwheel");
-
-        if (spinnwheelBaseMesh == null)
-        {
-          spinnwheelBaseMesh = GenMesh("base");
-        }
-        if (spinnwheelTopMesh == null)
-        {
-          spinnwheelTopMesh = GenMesh("top");
-        }
-      }
     }
 
     public void IsSpinning(IPlayer byPlayer)
@@ -229,32 +215,6 @@ namespace tailorsstory
 
       quantityPlayersSpinning = playersSpinning.Count;
 
-      updateSpinningState();
-    }
-
-    bool beforeSpinning;
-    void updateSpinningState()
-    {
-      if (Api?.World == null) return;
-
-      bool nowSpinning = quantityPlayersSpinning > 0;
-
-      if (nowSpinning != beforeSpinning)
-      {
-        if (renderer != null)
-        {
-          renderer.ShouldRotateManual = quantityPlayersSpinning > 0;
-        }
-
-        Api.World.BlockAccessor.MarkBlockDirty(Pos, OnRetesselated);
-
-        if (Api.Side == EnumAppSide.Server)
-        {
-          MarkDirty();
-        }
-      }
-
-      beforeSpinning = nowSpinning;
     }
 
 
@@ -283,15 +243,6 @@ namespace tailorsstory
     }
 
 
-    private void OnRetesselated()
-    {
-      if (renderer == null) return; // Maybe already disposed
-
-      renderer.ShouldRender = quantityPlayersSpinning > 0;
-    }
-
-
-
 
     internal MeshData GenMesh(string type = "base")
     {
@@ -301,7 +252,7 @@ namespace tailorsstory
       MeshData mesh;
       ITesselatorAPI mesher = ((ICoreClientAPI)Api).Tesselator;
 
-      mesher.TesselateShape(block, Shape.TryGet(Api, "game:shapes/block/stone/quern/" + type + ".json"), out mesh);
+      mesher.TesselateShape(block, Shape.TryGet(Api, "tailorsstory:shapes/block/spinnwheel/spinningwheel.json"), out mesh);
 
       return mesh;
     }
@@ -399,7 +350,6 @@ namespace tailorsstory
           if (plr != null) playersSpinning.Add(plr.PlayerUID, worldForResolving.ElapsedMilliseconds);
         }
 
-        updateSpinningState();
       }
 
 
@@ -440,9 +390,6 @@ namespace tailorsstory
       base.OnBlockRemoved();
 
       clientDialog?.TryClose();
-
-      renderer?.Dispose();
-      renderer = null;
     }
 
     public override void OnBlockBroken(IPlayer byPlayer = null)
@@ -525,7 +472,7 @@ namespace tailorsstory
 
 
 
-    public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)
+    /*public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)
     {
       if (Block == null) return false;
 
@@ -534,21 +481,20 @@ namespace tailorsstory
       {
         mesher.AddMeshData(
             spinnwheelTopMesh.Clone()
-            .Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, renderer.AngleRad, 0)
+            .Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, 0, 0)
             .Translate(0 / 16f, 11 / 16f, 0 / 16f)
         );
       }
 
 
       return true;
-    }
+    }*/
 
 
     public override void OnBlockUnloaded()
     {
       base.OnBlockUnloaded();
 
-      renderer?.Dispose();
     }
 
   }
