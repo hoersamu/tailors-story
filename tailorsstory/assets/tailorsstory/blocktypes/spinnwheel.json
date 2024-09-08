@@ -8,7 +8,7 @@
     "terrain": ["*"],
     "tailorsstory": ["*"]
   },
-  "shape": { "base": "block/spinnwheel/spinningwheell" },
+  "shape": { "base": "block/spinnwheel/spinningwheel" },
   "blockmaterial": "Wood",
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldTpUseAnimation": "twohandplaceblock",
