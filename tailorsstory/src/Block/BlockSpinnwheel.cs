@@ -23,23 +23,22 @@ namespace tailorsstory
 
       BlockEntitySpinnwheel beSpinnwheel = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntitySpinnwheel;
 
-      if (beSpinnwheel != null && beSpinnwheel.CanSpin() && (blockSel.SelectionBoxIndex == 1 || beSpinnwheel.Inventory.openedByPlayerGUIds.Contains(byPlayer.PlayerUID)))
+      if (beSpinnwheel != null)
       {
 
-        return true;
+        return beSpinnwheel.OnPlayerInteract(byPlayer);
       }
 
-      return base.OnBlockInteractStart(world, byPlayer, blockSel);
+      return false;
     }
 
     public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
     {
       BlockEntitySpinnwheel beSpinnwheel = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntitySpinnwheel;
 
-      if (beSpinnwheel != null && (blockSel.SelectionBoxIndex == 1 || beSpinnwheel.Inventory.openedByPlayerGUIds.Contains(byPlayer.PlayerUID)))
+      if (beSpinnwheel != null)
       {
-        beSpinnwheel.IsSpinning(byPlayer);
-        return beSpinnwheel.CanSpin();
+        return beSpinnwheel.whileSpinning(secondsUsed, byPlayer, world);
       }
 
       return false;
@@ -47,21 +46,12 @@ namespace tailorsstory
 
     public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
     {
-      BlockEntitySpinnwheel beSpinnwheel = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntitySpinnwheel;
-      if (beSpinnwheel != null)
-      {
-        beSpinnwheel.SetPlayerSpinning(byPlayer, false);
-      }
+
 
     }
 
     public override bool OnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason)
     {
-      BlockEntitySpinnwheel beSpinnwheel = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntitySpinnwheel;
-      if (beSpinnwheel != null)
-      {
-        beSpinnwheel.SetPlayerSpinning(byPlayer, false);
-      }
 
 
       return true;
@@ -88,7 +78,7 @@ namespace tailorsstory
             MouseButton = EnumMouseButton.Right,
             ShouldApply = (wi, bs, es) => {
                 BlockEntitySpinnwheel beSpinnwheel = world.BlockAccessor.GetBlockEntity(bs.Position) as BlockEntitySpinnwheel;
-                return beSpinnwheel != null && beSpinnwheel.CanSpin();
+                return beSpinnwheel != null;
             }
           }
       }.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));

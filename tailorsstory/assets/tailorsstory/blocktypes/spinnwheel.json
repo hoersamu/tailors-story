@@ -3,6 +3,7 @@
   "class": "BlockSpinnwheel",
   "entityClass": "BlockEntitySpinnwheel",
   "behaviors": [{ "name": "Container" }, { "name": "BreakIfFloating" }],
+  "entityBehaviors": [{ "name": "Animatable" }],
   "creativeinventory": {
     "general": ["*"],
     "terrain": ["*"],

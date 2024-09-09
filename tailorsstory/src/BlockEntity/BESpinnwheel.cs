@@ -17,7 +17,7 @@ namespace tailorsstory
 
     // For how long the current fiber has been spinning
     public float inputSpinTime;
-    public float prevInputSpinTime;
+    public float consecutiveSpins;
 
     GuiDialogBlockEntitySpinnwheel clientDialog;
 
@@ -27,19 +27,9 @@ namespace tailorsstory
     // Client and serverside
     int quantityPlayersSpinning;
 
-    int nowOutputFace;
+    int nowOutputFace = 0;
 
     #region Getters
-
-    public float SpinningSpeed
-    {
-      get
-      {
-        if (quantityPlayersSpinning > 0) return 1f;
-
-        return 0;
-      }
-    }
 
 
     MeshData spinnwheelBaseMesh
@@ -71,7 +61,7 @@ namespace tailorsstory
     // seconds it requires to spin the spinnable
     public virtual float maxSpinningTime()
     {
-      return 4;
+      return 3;
     }
 
     public override string InventoryClassName
@@ -98,7 +88,18 @@ namespace tailorsstory
       inventory.SlotModified += OnSlotModifid;
     }
 
-
+    BlockEntityAnimationUtil AnimUtil
+    {
+      get { return GetBehavior<BEBehaviorAnimatable>().animUtil; }
+    }
+    readonly AnimationMetaData CompressAnimMeta = new()
+    {
+      Animation = "SpinningFlyer",
+      Code = "SpinningFlyer",
+      AnimationSpeed = 1,
+      EaseOutSpeed = 1,
+      EaseInSpeed = 1
+    };
 
     public override void Initialize(ICoreAPI api)
     {
@@ -106,118 +107,49 @@ namespace tailorsstory
 
       inventory.LateInitialize("spinnwheel-" + Pos.X + "/" + Pos.Y + "/" + Pos.Z, api);
 
-      RegisterGameTickListener(Every100ms, 100);
-      RegisterGameTickListener(Every500ms, 500);
+      //TODO: Add block rotation
+      //TODO: change nowOutputFace to represent the front
 
 
     }
 
-    public void IsSpinning(IPlayer byPlayer)
+    public bool whileSpinning(float dt, IPlayer player, IWorldAccessor world)
     {
-      SetPlayerSpinning(byPlayer, true);
-    }
 
-    private void Every100ms(float dt)
-    {
-      // Only tick on the server and merely sync to client
-      if (Api.Side == EnumAppSide.Client) return;
-
-      float spinningSpeed = SpinningSpeed;
-
-      // Use up fuel
-      if (CanSpin() && spinningSpeed > 0)
+      if (dt >= maxSpinningTime() * consecutiveSpins)
       {
-        inputSpinTime += dt * spinningSpeed;
-
-        if (inputSpinTime >= maxSpinningTime())
-        {
-          spinInput();
-          inputSpinTime = 0;
-        }
-
-        MarkDirty();
+        spinInput(player, world);
+        inputSpinTime = 0;
       }
+
+      MarkDirty();
+      return true;
     }
 
-    private void spinInput()
+    private bool spinInput(IPlayer player, IWorldAccessor world)
     {
-      int requiredMaterial = InputSpinnableAttributes.inputStackSize;
-      if (InputSlot.Itemstack.StackSize < requiredMaterial) return;
+      ItemSlot itemSlot = player.InventoryManager.ActiveHotbarSlot;
+      ItemStack spinningItem = itemSlot.Itemstack;
+      SpinnableAttributes InputSpinnableAttributes = new SpinnableAttributes(spinningItem.Collectible);
+      if (!CanSpin(spinningItem)) return false;
 
-      ItemStack spinnedStack = InputSpinnableAttributes.GetItemStack(Api.World);
-      if (spinnedStack == null) return;
+      ItemStack spinnedStack = InputSpinnableAttributes.GetItemStack(world);
+      if (spinnedStack == null) return false;
 
-      if (OutputSlot.Itemstack == null)
+      if (itemSlot.CanTake())
       {
-        OutputSlot.Itemstack = spinnedStack;
-      }
-      else
-      {
-        int mergableQuantity = OutputSlot.Itemstack.Collectible.GetMergableQuantity(OutputSlot.Itemstack, spinnedStack, EnumMergePriority.AutoMerge);
+        itemSlot.TakeOut(InputSpinnableAttributes.inputStackSize);
 
-        if (mergableQuantity > 0)
-        {
-          OutputSlot.Itemstack.StackSize += spinnedStack.StackSize;
-        }
-        else
+        if (!player.InventoryManager.TryGiveItemstack(spinnedStack))
         {
           BlockFacing face = BlockFacing.HORIZONTALS[nowOutputFace];
-          nowOutputFace = (nowOutputFace + 1) % 4;
-
-          Block block = Api.World.BlockAccessor.GetBlock(Pos.AddCopy(face));
-          if (block.Replaceable < 6000) return;
           Api.World.SpawnItemEntity(spinnedStack, Pos.ToVec3d().Add(0.5 + face.Normalf.X * 0.7, 0.75, 0.5 + face.Normalf.Z * 0.7), new Vec3d(face.Normalf.X * 0.02f, 0, face.Normalf.Z * 0.02f));
+
         }
       }
-
-      InputSlot.TakeOut(requiredMaterial);
-      InputSlot.MarkDirty();
-      OutputSlot.MarkDirty();
+      consecutiveSpins += 1;
+      return true;
     }
-
-
-    // Sync to client every 500ms
-    private void Every500ms(float dt)
-    {
-      if (Api.Side == EnumAppSide.Server && (SpinningSpeed > 0 || prevInputSpinTime != inputSpinTime) && InputSpinnableAttributes != null)  //don't spam update packets when empty, as inputSpinTime is irrelevant when empty
-      {
-        MarkDirty();
-      }
-
-      prevInputSpinTime = inputSpinTime;
-
-
-      foreach (var val in playersSpinning)
-      {
-        long ellapsedMs = Api.World.ElapsedMilliseconds;
-        if (ellapsedMs - val.Value > 1000)
-        {
-          playersSpinning.Remove(val.Key);
-          break;
-        }
-      }
-    }
-
-
-
-
-
-    public void SetPlayerSpinning(IPlayer player, bool playerSpinning)
-    {
-      if (playerSpinning)
-      {
-        playersSpinning[player.PlayerUID] = Api.World.ElapsedMilliseconds;
-      }
-      else
-      {
-        playersSpinning.Remove(player.PlayerUID);
-      }
-
-      quantityPlayersSpinning = playersSpinning.Count;
-
-    }
-
-
 
 
     private void OnSlotModifid(int slotid)
@@ -260,33 +192,57 @@ namespace tailorsstory
 
 
 
-    public bool CanSpin()
+    public bool CanSpin(ItemStack stack)
     {
-      SpinnableAttributes spinProps = InputSpinnableAttributes;
-      if (spinProps == null) return false;
-      return true;
+      SpinnableAttributes spinAttrib = new SpinnableAttributes(stack.Collectible);
+      if (spinAttrib.isSpinnable && spinAttrib.inputStackSize <= stack.StackSize)
+      {
+        return true;
+      }
+      return false;
     }
 
     #region Events
 
-    public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
-    {
-      if (blockSel.SelectionBoxIndex == 1) return false;
 
-      if (Api.Side == EnumAppSide.Client)
+    public bool OnPlayerInteract(IPlayer byPlayer)
+    {
+
+      ItemStack stack = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
+      if (CanSpin(stack))
       {
+        consecutiveSpins = 1;
+        if (IsValidSpinningMaterial(stack))
+        {
+
+          byPlayer.InventoryManager.BroadcastHotbarSlot();
+          (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
+          AnimUtil.StartAnimation(CompressAnimMeta);
+          return true;
+
+        }
+      }
+      return false;
+    }
+
+    public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
+    { /* TODO: Replace with "Ornamental Yarn Storage"
+
         toggleInventoryDialogClient(byPlayer, () =>
         {
           clientDialog = new GuiDialogBlockEntitySpinnwheel(DialogTitle, Inventory, Pos, Api as ICoreClientAPI);
           clientDialog.Update(inputSpinTime, maxSpinningTime());
           return clientDialog;
         });
-
-      }
-
+      */
       return true;
+
     }
 
+    private static bool IsValidSpinningMaterial(ItemStack stack)
+    {
+      return new SpinnableAttributes(stack?.Collectible).isSpinnable;
+    }
 
     public override void OnReceivedClientPacket(IPlayer player, int packetid, byte[] data)
     {
@@ -422,20 +378,6 @@ namespace tailorsstory
     {
       get { return inventory[1].Itemstack; }
       set { inventory[1].Itemstack = value; inventory[1].MarkDirty(); }
-    }
-
-
-    public SpinnableAttributes InputSpinnableAttributes
-    {
-      get
-      {
-        ItemSlot slot = inventory[0];
-        if (slot.Itemstack == null) return null;
-        SpinnableAttributes spinnableAttributes = new SpinnableAttributes(slot.Itemstack.Collectible);
-        if (!spinnableAttributes.isSpinnable) return null;
-
-        return spinnableAttributes;
-      }
     }
 
     #endregion
